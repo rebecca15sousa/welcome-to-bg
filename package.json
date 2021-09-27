@@ -1,0 +1,27 @@
+{
+  "name": "welcome-to-bg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cards.js",
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rebecca15sousa/welcome-to-bg.git"
+  },
+  "browserslist": "defaults and supports async-functions",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rebecca15sousa/welcome-to-bg/issues"
+  },
+  "homepage": "https://github.com/rebecca15sousa/welcome-to-bg#readme",
+  "dependencies": {
+    "boardgame.io": "^0.48.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
