@@ -1,6 +1,48 @@
 const frontCardsDiv = document.getElementById("frontCardsDiv");
 const backCardsDiv = document.getElementById("backCardsDiv");
 const drawBtn = document.getElementById("drawBtn");
+const goals1 = document.getElementById("goals1");
+const goals2 = document.getElementById("goals2");
+const goals3 = document.getElementById("goals3");
+
+let deckGoals = [];
+
+function createDeckGoals() {
+    let range = 1;
+    for (let i = 0; i < 3; i++) {
+        let index = Math.floor((Math.random() * 5) + range);
+        let front;
+        let back;
+            if (index < 10) {
+                front = "assets/goals/goals_front_0" + index + ".png";
+                back = "assets/goals/goals_back_0" + index + ".png";
+            } else {
+                front = "assets/goals/goals_front_" + index + ".png";
+                back = "assets/goals/goals_back_" + index + ".png";
+            }
+            let card = new Card(i, front, back);
+            deckGoals.push(card);            
+        range += 6;
+    }
+}
+
+function displayGoals() {
+    for (let i = 1; i < 4; i++) {
+        document.getElementById("goals" + i).src = deckGoals[i - 1].front;
+    }
+}
+
+goals1.addEventListener("click", function(e) {
+    e.target.src = deckGoals[0].back;
+});
+
+goals2.addEventListener("click", function(e) {
+    e.target.src = deckGoals[1].back;
+});
+
+goals3.addEventListener("click", function(e) {
+    e.target.src = deckGoals[2].back;
+});
 
 let deckConstruction = [];
 let discardedCards = [];
@@ -104,6 +146,11 @@ function displayDiscard() {
 }
 
 createDeck();
+createDeckGoals();
+drawCards();
+displayDeck();
+displayDiscard();
+displayGoals();
 
 drawBtn.addEventListener("click", function() {
     drawCards();

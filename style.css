@@ -8,7 +8,7 @@ body {
     display: inline;
 }
 
-#frontCardsDiv, #backCardsDiv {
+#goalsCardsDiv, #frontCardsDiv, #backCardsDiv {
     width: 40%;
     margin: 0 auto;
 }
