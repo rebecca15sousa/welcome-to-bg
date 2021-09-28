@@ -22,3 +22,9 @@ body {
   /* position: absolute; */
     transition:opacity 0.8s linear;
 }
+
+#shuffleWarning {
+  font-weight: bold;
+  display: inline;
+  opacity: 0;
+}

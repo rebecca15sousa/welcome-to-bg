@@ -178,12 +178,32 @@ function readyPlayer(e, numPlayers) {
     displayDeck();
     displayDiscard();
     readiedPlayers = 0;
+    if (deckConstruction.length < 4) {
+      document.getElementById("shuffleWarning").style.opacity = 100;
+    } else {
+      document.getElementById("shuffleWarning").style.opacity = 0;
+    }
 
     let buttons = document.getElementsByTagName('button');
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].disabled = false;
     }
   }
+}
+
+function undoLastTurn() {
+  for (let i = 0; i < 3; i++) {
+    deckConstruction.unshift(discardedCards[discardedCards.length - 1]);
+    discardedCards.pop();
+}
+// if (discardedCards.length < 3) {
+//     let quantity = discardedCards.length - 3;
+//     for (let j = 0; j < quantity; j++) {
+//         deckConstruction[j] = discardedCards[j];
+//     }
+//     discardedCards.splice(0, quantity);
+//     deckConstruction = shuffleDeck(deckConstruction);
+//   }
 }
 
 function createPlayerButtons() {
@@ -207,5 +227,22 @@ function createPlayerButtons() {
   }
 }
 
-// document.addEventListener('keydown')
+document.getElementById("undoButton").addEventListener("click", function() {
+ undoLastTurn();
+ displayDeck();
+ displayDiscard();
+ readiedPlayers = 0;
+ let buttons = document.getElementsByTagName('button');
+ for (let i = 0; i < buttons.length; i++) {
+   buttons[i].disabled = false;
+ }
+});
+
+document.addEventListener("keydown", function(e) {
+  event.preventDefault();
+  if (event.keyCode === 8) {
+document.getElementById("undoButton").click();
+}
+});
+
 createPlayerButtons();
