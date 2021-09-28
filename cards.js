@@ -21,7 +21,7 @@ function createDeckGoals() {
                 back = "assets/goals/goals_back_" + index + ".png";
             }
             let card = new Card(i, front, back);
-            deckGoals.push(card);            
+            deckGoals.push(card);
         range += 6;
     }
 }
@@ -85,7 +85,7 @@ function createDeck() {
             }
             let back = "assets/construction_cards/" + cardType.type + "_back.png";
             let card = new Card(j, front, back);
-            deckConstruction.push(card);            
+            deckConstruction.push(card);
         }
     }
     deckConstruction = shuffleDeck(deckConstruction);
@@ -152,10 +152,41 @@ displayDeck();
 displayDiscard();
 displayGoals();
 
-drawBtn.addEventListener("click", function() {
-    drawCards();
-    displayDeck();
-    displayDiscard();
-});
+// drawBtn.addEventListener("click", function() {
+//     drawCards();
+//     displayDeck();
+//     displayDiscard();
+// });
 
 console.log(deckConstruction);
+
+let readiedPlayers = 0;
+
+function createPlayerButtons() {
+  let numPlayers = prompt("How many players?", "5");
+  numPlayers = parseInt(numPlayers);
+  const playerButtons = document.getElementById("playerButtons");
+  for (let i = 0; i < numPlayers; i++) {
+    let button = document.createElement("button");
+    button.textContent = "READY!";
+    button.addEventListener("click", function(e) {
+      e.target.disabled = true;
+      readiedPlayers++;
+      if (readiedPlayers == numPlayers) {
+        drawCards();
+        displayDeck();
+        displayDiscard();
+        readiedPlayers = 0;
+
+        let buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = false;
+        }
+      }
+    })
+
+    playerButtons.appendChild(button);
+  }
+}
+
+createPlayerButtons();
