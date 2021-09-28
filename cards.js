@@ -21,7 +21,7 @@ function createDeckGoals() {
                 back = "assets/goals/goals_back_" + index + ".png";
             }
             let card = new Card(i, front, back);
-            deckGoals.push(card);            
+            deckGoals.push(card);
         range += 6;
     }
 }
@@ -85,7 +85,7 @@ function createDeck() {
             }
             let back = "assets/construction_cards/" + cardType.type + "_back.png";
             let card = new Card(j, front, back);
-            deckConstruction.push(card);            
+            deckConstruction.push(card);
         }
     }
     deckConstruction = shuffleDeck(deckConstruction);
@@ -134,14 +134,21 @@ function drawCards() {
 
 function displayDeck() {
     for (let i = 1; i < 4; i++) {
-        document.getElementById("front" + i).src = deckConstruction[i - 1].front;
+        document.getElementById("front" + i + "Animation").classList.add("animation");
+        setTimeout(function(){
+          document.getElementById("front" + i).src = deckConstruction[i - 1].front;
+          document.getElementById("front" + i + "Animation").classList.remove("animation"); }, 1000);
     }
 }
 
 function displayDiscard() {
     let l = discardedCards.length;
     for (let i = 1; i < 4; i++) {
-        document.getElementById("back" + i).src = discardedCards[l - i].back;
+        // document.getElementById("back" + i).src = discardedCards[l - i].back;
+        document.getElementById("back" + i + "Animation").classList.add("animation");
+        setTimeout(function(){
+          document.getElementById("back" + i).src = discardedCards[l - i].back;
+          document.getElementById("back" + i + "Animation").classList.remove("animation"); }, 1000);
     }
 }
 

@@ -8,7 +8,17 @@ body {
     display: inline;
 }
 
+.animation {
+  opacity: 0;
+  /* filter: blur(5px); */
+}
+
 #goalsCardsDiv, #frontCardsDiv, #backCardsDiv {
     width: 40%;
     margin: 0 auto;
+}
+
+#front1Animation, #front2Animation, #front3Animation, #back1Animation, #back2Animation, #back3Animation {
+  /* position: absolute; */
+    transition:opacity 0.8s linear;
 }
