@@ -4,6 +4,7 @@ const drawBtn = document.getElementById("drawBtn");
 const goals1 = document.getElementById("goals1");
 const goals2 = document.getElementById("goals2");
 const goals3 = document.getElementById("goals3");
+let tecla = 49;
 
 let deckGoals = [];
 
@@ -159,10 +160,52 @@ displayDeck();
 displayDiscard();
 displayGoals();
 
-drawBtn.addEventListener("click", function() {
+// drawBtn.addEventListener("click", function() {
+//     drawCards();
+//     displayDeck();
+//     displayDiscard();
+// });
+
+console.log(deckConstruction);
+
+let readiedPlayers = 0;
+
+function readyPlayer(e, numPlayers) {
+  e.target.disabled = true;
+  readiedPlayers++;
+  if (readiedPlayers == numPlayers) {
     drawCards();
     displayDeck();
     displayDiscard();
-});
+    readiedPlayers = 0;
 
-console.log(deckConstruction);
+    let buttons = document.getElementsByTagName('button');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = false;
+    }
+  }
+}
+
+function createPlayerButtons() {
+  let numPlayers = prompt("How many players?", "5");
+  numPlayers = parseInt(numPlayers);
+  const playerButtons = document.getElementById("playerButtons");
+  for (let i = 0; i < numPlayers; i++) {
+    let button = document.createElement("button");
+    button.id = "button id" + i;
+    button.textContent = "READY!";
+    button.addEventListener("click", function(e) {
+    readyPlayer(e, numPlayers);
+  });
+  document.addEventListener("keydown", function(e) {
+    event.preventDefault();
+    if (event.keyCode === tecla + i || event.keyCode === 32) {
+  document.getElementById("button id" + i).click();
+}
+  });
+    playerButtons.appendChild(button);
+  }
+}
+
+// document.addEventListener('keydown')
+createPlayerButtons();
