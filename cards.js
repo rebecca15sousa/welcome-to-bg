@@ -159,6 +159,7 @@ drawCards();
 displayDeck();
 displayDiscard();
 displayGoals();
+displayWarnings();
 
 // drawBtn.addEventListener("click", function() {
 //     drawCards();
@@ -177,17 +178,27 @@ function readyPlayer(e, numPlayers) {
     drawCards();
     displayDeck();
     displayDiscard();
+    displayWarnings();
     readiedPlayers = 0;
-    if (deckConstruction.length < 4) {
-      document.getElementById("shuffleWarning").style.opacity = 100;
-    } else {
-      document.getElementById("shuffleWarning").style.opacity = 0;
-    }
 
-    let buttons = document.getElementsByTagName('button');
+ let buttons = document.getElementsByClassName("playerButtons");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].disabled = false;
     }
+  }
+}
+
+function displayWarnings() {
+  if (deckConstruction.length < 4) {
+    document.getElementById("shuffleWarning").style.opacity = 100;
+  } else {
+    document.getElementById("shuffleWarning").style.opacity = 0;
+  }
+
+  if (deckConstruction.length > 77 || discardedCards.length < 4) {
+    document.getElementById("undoButton").disabled = true;
+  } else {
+    document.getElementById("undoButton").disabled = false;
   }
 }
 
@@ -196,6 +207,7 @@ function undoLastTurn() {
     deckConstruction.unshift(discardedCards[discardedCards.length - 1]);
     discardedCards.pop();
 }
+ // displayWarnings();
 // if (discardedCards.length < 3) {
 //     let quantity = discardedCards.length - 3;
 //     for (let j = 0; j < quantity; j++) {
@@ -213,6 +225,7 @@ function createPlayerButtons() {
   for (let i = 0; i < numPlayers; i++) {
     let button = document.createElement("button");
     button.id = "button id" + i;
+    button.classList = "playerButtons";
     button.textContent = "READY!";
     button.addEventListener("click", function(e) {
     readyPlayer(e, numPlayers);
@@ -228,11 +241,13 @@ function createPlayerButtons() {
 }
 
 document.getElementById("undoButton").addEventListener("click", function() {
- undoLastTurn();
- displayDeck();
- displayDiscard();
- readiedPlayers = 0;
- let buttons = document.getElementsByTagName('button');
+   undoLastTurn();
+   displayDeck();
+   displayDiscard();
+   displayWarnings();
+   readiedPlayers = 0;
+
+ let buttons = document.getElementsByClassName("playerButtons");
  for (let i = 0; i < buttons.length; i++) {
    buttons[i].disabled = false;
  }
