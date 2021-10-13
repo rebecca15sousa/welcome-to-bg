@@ -166,6 +166,7 @@ drawCards();
 displayDeck();
 displayDiscard();
 displayGoals();
+preLoadingCards();
 displayWarnings();
 
 // drawBtn.addEventListener("click", function() {
