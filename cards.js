@@ -5,7 +5,7 @@ const goals1 = document.getElementById("goals1");
 const goals2 = document.getElementById("goals2");
 const goals3 = document.getElementById("goals3");
 let tecla = 49;
-
+let imageArray = [];
 let deckGoals = [];
 
 function createDeckGoals() {
@@ -151,6 +151,13 @@ function displayDiscard() {
           document.getElementById("back" + i).src = discardedCards[l - i].back;
           document.getElementById("back" + i + "Animation").classList.remove("animation"); }, 1000);
     }
+}
+
+function preLoadingCards() {
+  for (let i = 0; i < deckConstruction.length; i++) {
+    imageArray[i] = new Image();
+    imageArray[i].src = deckConstruction[i].front;
+  }
 }
 
 createDeck();
